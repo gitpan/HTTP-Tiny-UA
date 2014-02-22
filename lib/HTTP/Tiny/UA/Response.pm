@@ -4,10 +4,33 @@ use warnings;
 
 package HTTP::Tiny::UA::Response;
 # ABSTRACT: Wrap HTTP::Tiny response as objects with accessors
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 use Class::Tiny qw( success url status reason content headers protocol );
 
+# =attr success
+#
+# =attr url
+#
+# =attr protocol
+#
+# =attr status
+#
+# =attr reason
+#
+# =attr content
+#
+# =attr headers
+#
+# =method header
+#
+#     $response->header( "Content-Length" );
+#
+# Return a header out of the headers hash.  The field is case-insensitive.  If
+# the header was repeated, the value returned will be an array reference.
+# Otherwise it will be a scalar value.
+#
+# =cut
 
 sub header {
     my ( $self, $field ) = @_;
@@ -23,7 +46,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -31,7 +54,7 @@ HTTP::Tiny::UA::Response - Wrap HTTP::Tiny response as objects with accessors
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

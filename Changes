@@ -1,5 +1,11 @@
 Revision history for HTTP-Tiny-UA
 
+0.002     2014-02-22 07:19:14-05:00 America/New_York
+
+    [FIXED]
+
+    - Tests were failing with new HTTP::Tiny 0.043+ with keep_alive support
+
 0.001     2013-10-05 22:20:37 America/New_York
 
     - First release

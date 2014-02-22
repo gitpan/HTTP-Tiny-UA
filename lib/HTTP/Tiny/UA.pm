@@ -4,12 +4,63 @@ use warnings;
 
 package HTTP::Tiny::UA;
 # ABSTRACT: Higher-level UA features for HTTP::Tiny
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 use superclass 'HTTP::Tiny' => 0.036;
 
 use HTTP::Tiny::UA::Response;
 
+# =method new
+#
+#     $http = HTTP::Tiny::UA->new( %attributes );
+#
+# This is inherited from L<HTTP::Tiny>.  The only difference so far is that
+# C<agent> will be C<HTTP-Tiny-UA/$VERSION>.
+#
+# =for :list
+# * C<agent>
+# A user-agent string (defaults to 'HTTP-Tiny-UA/$VERSION'). If C<agent> ends in a space character, the default user-agent string is appended.
+# * C<cookie_jar>
+# An instance of L<HTTP::CookieJar> or equivalent class that supports the C<add> and C<cookie_header> methods
+# * C<default_headers>
+# A hashref of default headers to apply to requests
+# * C<local_address>
+# The local IP address to bind to
+# * C<max_redirect>
+# Maximum number of redirects allowed (defaults to 5)
+# * C<max_size>
+# Maximum response size (only when not using a data callback).  If defined,
+# responses larger than this will return an exception.
+# * C<proxy>
+# URL of a proxy server to use (default is C<$ENV{http_proxy}> if set)
+# * C<no_proxy>
+# List of domain suffixes that should not be proxied.  Must be a comma-separated string or an array reference. (default is C<$ENV{no_proxy}>)
+# * C<timeout>
+# Request timeout in seconds (default is 60)
+# * C<verify_SSL>
+# A boolean that indicates whether to validate the SSL certificate of an C<https>
+# connection (default is false)
+# * C<SSL_options>
+# A hashref of C<SSL_*> options to pass through to L<IO::Socket::SSL>
+#
+# See L<SSL SUPPORT in HTTP::Tiny|HTTP::Tiny/SSL SUPPORT> for more on the
+# C<verify_SSL> and C<SSL_options> attributes.
+#
+# =method get|head|put|post|post_form|mirror|delete
+#
+# These methods are inherited from L<HTTP::Tiny> and work the same, except they
+# invoke the L<HTTP::Tiny::UA request|/request> method and return a
+# L<HTTP::Tiny::UA::Response> object.
+#
+# =method request
+#
+#     my $res = HTTP::Tiny->new->get( $url );
+#
+# Just like L<HTTP::Tiny::request|HTTP::Tiny/request>, but returns a
+# L<HTTP::Tiny::UA::Reponse> object.  All other C<get>, C<post>, etc. methods
+# eventually invoke this one so all such methods return response objects now.
+#
+# =cut
 
 sub request {
     my ( $self, @args ) = @_;
@@ -26,7 +77,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -34,7 +85,7 @@ HTTP::Tiny::UA - Higher-level UA features for HTTP::Tiny
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

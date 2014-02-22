@@ -2,7 +2,7 @@ NAME
     HTTP::Tiny::UA - Higher-level UA features for HTTP::Tiny
 
 VERSION
-    version 0.001
+    version 0.002
 
 SYNOPSIS
         use HTTP::Tiny::UA;
